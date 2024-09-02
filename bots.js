@@ -1,8 +1,8 @@
 function startBots() {
-    const roomCode = document.getElementById('roomCode').value;
+    const roomCode = document.getElementById('roomCode').value.trim();
     const botCount = parseInt(document.getElementById('botCount').value);
-    const proxies = document.getElementById('proxies').value.split('\n').filter(proxy => proxy.trim() !== '');
-    
+    const proxies = document.getElementById('proxies').value.split('\n').map(p => p.trim()).filter(p => p);
+
     if (!roomCode || isNaN(botCount) || botCount < 1) {
         alert('Please enter a valid room code and bot count.');
         return;
@@ -14,7 +14,7 @@ function startBots() {
     }
 
     for (let i = 0; i < botCount; i++) {
-        const proxy = proxies[i % proxies.length]; // إعادة استخدام البروكسي إذا انتهت القائمة
+        const proxy = proxies[i % proxies.length];  // استخدام البروكسيات بشكل دائري
         createBot(roomCode, `Bot${i + 1}`, proxy);
     }
 }
@@ -23,7 +23,7 @@ function createBot(roomCode, botName, proxy) {
     const serverUrl = `wss://gartic.io/socket.io/?EIO=3&transport=websocket`;
 
     // إعداد البروكسي للاتصال
-    const ws = new WebSocket(serverUrl, null, {
+    const ws = new WebSocket(serverUrl, [], {
         headers: {
             'X-Forwarded-For': proxy
         }
