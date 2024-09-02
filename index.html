@@ -10,15 +10,18 @@
             font-family: Arial, sans-serif;
             background-color: #282c34;
             color: white;
-            text-align: center;
-            margin-top: 50px;
-        }
-        .container {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
         input, button, textarea {
             padding: 10px;
@@ -26,12 +29,12 @@
             font-size: 16px;
             border-radius: 5px;
             border: none;
-            width: 300px;
         }
         button {
             background-color: #61dafb;
             color: #282c34;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
         button:hover {
             background-color: #21a1f1;
@@ -43,10 +46,9 @@
         <h1>Gartic.io Bot Generator</h1>
         <input type="text" id="roomCode" placeholder="Enter Room Code">
         <input type="number" id="botCount" placeholder="Number of Bots" min="1" max="255">
-        <textarea id="proxies" placeholder="Enter proxies (one per line)"></textarea>
         <button onclick="startBots()">Start Bots</button>
+        <textarea id="log" rows="10" cols="50" readonly></textarea>
     </div>
-
     <script src="bots.js"></script>
 </body>
 </html>
